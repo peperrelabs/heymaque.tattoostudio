@@ -19,26 +19,39 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">
-            <img src="/img/logo.png" alt="Logo">
-        </div>
-        <ul class="nav-links">
-            <li><a href="#artistas">Artistas</a></li>
-            <li><a href="#galeria">Portfolio</a></li>
-            <li><a href="#contacto" class="btn-reserva">Reservar</a></li>
-        </ul>
-        <div class="hamburger">
-            <i class="fas fa-bars"></i>
+        <div class="container navbar-content">
+            <a href="#" class="navbar-logo">
+                <img src="img/logo.jpg" alt="Hey Maque Tattoo Studio">
+            </a>
+
+            <!-- Mobile Toggle (Hidden on desktop) -->
+            <button class="menu-toggle" id="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="navbar-menu" id="navbar-menu">
+                <a href="#artistas" onclick="toggleMenu()">Artistas</a>
+                <a href="#galeria" onclick="toggleMenu()">Portfolio</a>
+                <a href="#contacto" onclick="toggleMenu()">Ubicación</a>
+            </div>
+
+            <a href="#reservar" class="navbar-cta">
+                Reservar
+            </a>
         </div>
     </nav>
 
-    <header class="hero">
+    <section class="hero">
         <div class="hero-content">
-            <h1>Arte en tu Piel</h1>
-            <p>Especialistas en Fine Line, Ilustración y Freehand</p>
-            <a href="#artistas" class="btn-outline">Conoce a las artistas</a>
+            <span class="hero-subtitle">Especialistas en Fine Line, Ilustración y Freehand</span>
+            <div class="hero-badge">desde 2020</div>
+            <img src="img/logo_transparent.png" alt="Hey Maque Tattoo Studio" class="hero-logo-large">
+
+            <a href="#artistas" class="btn-premium">
+                Conoce a las artistas
+            </a>
         </div>
-    </header>
+    </section>
 
     <section id="artistas" class="artists-section">
         <div class="section-title">
@@ -49,7 +62,7 @@
         <div class="artist-container">
             <div class="artist-card">
                 <div class="artist-img">
-                    <img src="/img/maque.jpg" alt="Maque Tattooist">
+                    <img src="img/maque.jpg" alt="Maque Tattooist">
                 </div>
                 <div class="artist-info">
                     <h3>Maque</h3>
@@ -66,7 +79,7 @@
 
             <div class="artist-card reverse">
                 <div class="artist-img">
-                    <img src="/img/maque2.jpg" alt="Marta Gris Tatt">
+                    <img src="img/marta.jpg" alt="Marta Gris Tatt">
                 </div>
                 <div class="artist-info">
                     <h3>Marta</h3>
@@ -99,22 +112,114 @@
         </div>
     </section>
 
-    <footer id="contacto">
+    <section id="reservar" class="reservation-section">
+        <div class="section-title">
+            <h2>Pasos para reservar tu cita 🗓️</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="steps-container">
+            <div class="step-card">
+                <span class="step-number">1</span>
+                <h3>Tu Idea</h3>
+                <p>Cuéntanos tu idea y envíanos imágenes de referencia</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">2</span>
+                <h3>Zona</h3>
+                <p>Indícanos zona del cuerpo</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">3</span>
+                <h3>Tamaño</h3>
+                <p>Coméntanos tamaño en centímetros</p>
+            </div>
+            <div class="step-card">
+                <span class="step-number">4</span>
+                <h3>Disponibilidad</h3>
+                <p>Dinos tu disponibilidad: días y horas</p>
+            </div>
+        </div>
+
+        <div class="reservation-footer">
+            <p class="highlight-text">Así nos ayudarás muchísimo a que todo sea más rápido 💪🏼</p>
+            <p>Síguenos a nuestras cuentas para que así podamos crecer !</p>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact-new-section">
+        <div class="services-header section-title">
+            <h2>Visítanos</h2>
+            <div class="line"></div>
+            <p>Pásate por el estudio para hablar de tu próximo proyecto. <br>Atendemos solo con cita previa para
+                dedicarte el tiempo que mereces.</p>
+        </div>
+        <div class="contact-container">
+            <!-- Left Info -->
+            <div class="contact-details-col">
+                <div class="contact-list">
+                    <!-- Location -->
+                    <div class="contact-row">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Ubicación</h3>
+                            <p>Calle Carretera de Carmona, 49,<br>41008 Sevilla, España</p>
+                        </div>
+                    </div>
+
+                    <!-- Hours -->
+                    <div class="contact-row">
+                        <div class="contact-icon-box">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Horario</h3>
+                            <span>Solo con cita previa</span>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="contact-row">
+                        <div class="contact-icon-box">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Contacto</h3>
+                            <a href="tel:628328338">628 328 338</a>
+                            <p>Atendemos por WhatsApp o Instagram</p>
+                            <div class="social-contact">
+                                <a href="https://wa.me/34628328338" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                <a href="https://www.instagram.com/heymaque.tattoostudio/" target="_blank"><i
+                                        class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Map -->
+            <div class="map-column">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12683.0!2d-5.97!3d37.39!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126c1c1c1c1c1c%3A0x0!2sCarretera+de+Carmona%2C+49%2C+41008+Sevilla!5e0!3m2!1ses!2ses!4v1!5m2!1ses!2ses"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    style="border:0; width: 100%; height: 100%; min-height: 300px;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
         <div class="footer-content">
             <div class="footer-col">
                 <h3>Hey Maque Tattoo Studio</h3>
                 <p>Donde la tinta se encuentra con la delicadeza.</p>
             </div>
-            <div class="footer-col">
-                <h4>Contacto</h4>
-                <a href="https://www.instagram.com/heymaque.tattoostudio/" target="_blank">
-                    <i class="fab fa-instagram"></i> @heymaque.tattoostudio
-                </a>
-                <p>Mairena del Aljarafe, Sevilla</p>
-            </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2026 Hey Maque Tattoo Studio. Diseño Web.</p>
+            <p>&copy; 2026 Hey Maque Tattoo Studio.</p>
+            <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">Created by <strong
+                    style="color: var(--gold-primary);">PeperreLabs</strong></p>
         </div>
     </footer>
 

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- CONFIGURACIÓN DE LA GALERÍA ---
-    const totalImagesInFolder = 30; // CAMBIA ESTO: Número total de fotos que tienes en la carpeta 'img'
+    const totalImagesInFolder = 17; // CAMBIA ESTO: Número total de fotos que tienes en la carpeta 'img'
     const imagesToShow = 10;        // Cuántas queremos mostrar
     const imageFolder = 'img/';     // Ruta de la carpeta
     const imageExtension = '.jpg';  // Extensión de tus archivos (asegúrate que sean todas iguales)
@@ -31,12 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
 
         // --- OPCIÓN A: TUS FOTOS REALES (Descomenta esto cuando tengas la carpeta lista) ---
-        // img.src = `${imageFolder}${index}${imageExtension}`;
-        // img.alt = `Tatuaje trabajo ${index}`;
-
-        // --- OPCIÓN B: FOTOS DE EJEMPLO (Para que veas la web funcionando ya) ---
-        img.src = `https://source.unsplash.com/random/400x600?tattoo,ink&sig=${index}`;
-        img.alt = "Tatuaje ejemplo";
+        img.src = `${imageFolder}${index}${imageExtension}`;
+        img.alt = `Tatuaje trabajo ${index}`;
 
         li.appendChild(img);
         track.appendChild(li);
@@ -69,22 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
         track.style.transform = `translateX(-${scrollAmount}px)`;
     });
 
-    // Menú Hamburguesa simple para móvil
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-        if (navLinks.style.display === 'flex') {
-            navLinks.style.display = 'none';
-        } else {
-            navLinks.style.display = 'flex';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '70px';
-            navLinks.style.right = '0';
-            navLinks.style.background = '#fff';
-            navLinks.style.width = '100%';
-            navLinks.style.padding = '2rem';
-        }
-    });
+    // Menú Hamburguesa simple para móvil (Lógica Antigua eliminada)
 });
+
+// Función Global para el menú
+function toggleMenu() {
+    const menu = document.getElementById('navbar-menu');
+    menu.classList.toggle('active');
+}
