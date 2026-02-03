@@ -247,10 +247,65 @@ ul { list-style: none; }
     font-size: 2rem;
     cursor: pointer;
     z-index: 5;
-    color: var(--text-color);
+    color: var(--gold);
+    -webkit-text-stroke: 1px black; /* Borde negro fino para contraste */
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5); /* Sombra adicional para profundidad */
+    transition: transform 0.2s;
 }
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
+.carousel-btn:hover { transform: translateY(-50%) scale(1.1); }
+
+/* LIGHTBOX (Visor de imágenes) */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: var(--gold);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-text-stroke: 1px black;
+    transition: 0.3s;
+    z-index: 2001;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .lightbox-content {
+        width: 100%;
+    }
+}
 
 
 /* RESERVA */

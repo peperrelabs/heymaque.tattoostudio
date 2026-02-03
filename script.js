@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = `${imageFolder}${index}${imageExtension}`;
         img.alt = `Tatuaje trabajo ${index}`;
 
+        // A: CLIC PARA ABRIR LIGHTBOX
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+            openLightbox(img.src);
+        });
+
         li.appendChild(img);
         track.appendChild(li);
     });
@@ -78,8 +84,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
 // Función Global para el menú
 function toggleMenu() {
     const menu = document.getElementById('navbar-menu');
     menu.classList.toggle('active');
+}
+
+// --- LÓGICA LIGHTBOX ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.lightbox-close');
+
+function openLightbox(src) {
+    lightbox.style.display = "flex"; // Usamos flex para centrar fácil
+    lightbox.style.alignItems = "center";
+    lightbox.style.justifyContent = "center";
+    lightboxImg.src = src;
+}
+
+// Cerrar con el botón
+closeBtn.onclick = function () {
+    lightbox.style.display = "none";
+}
+
+// Cerrar clicando fuera de la imagen
+lightbox.onclick = function (e) {
+    if (e.target !== lightboxImg) {
+        lightbox.style.display = "none";
+    }
 }
