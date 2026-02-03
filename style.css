@@ -222,7 +222,11 @@ ul { list-style: none; }
 .carousel-track {
     display: flex;
     height: 100%;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s ease-out; /* Suavizar un poco */
+    cursor: grab;
+}
+.carousel-track:active {
+    cursor: grabbing;
 }
 
 .carousel-slide {

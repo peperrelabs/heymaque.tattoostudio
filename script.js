@@ -35,10 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
         img.alt = `Tatuaje trabajo ${index}`;
 
         // A: CLIC PARA ABRIR LIGHTBOX
+        // A: CLIC PARA ABRIR LIGHTBOX
         img.style.cursor = 'pointer';
-        img.addEventListener('click', () => {
+        img.addEventListener('click', (e) => {
+            if (isDragging) {
+                e.preventDefault(); // Evitar abrir si se estaba arrastrando
+                return;
+            }
             openLightbox(img.src);
         });
+        // Evitar comportamiento de arrastre nativo de la imagen
+        img.addEventListener('dragstart', (e) => e.preventDefault());
 
         li.appendChild(img);
         track.appendChild(li);
@@ -68,6 +75,79 @@ document.addEventListener('DOMContentLoaded', () => {
         if (scrollAmount < 0) {
             scrollAmount = 0;
         }
+        track.style.transform = `translateX(-${scrollAmount}px)`;
+    });
+
+    // --- LÓGICA DE ARRASTRE (SWIPE) ---
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let isDragging = false; // Para diferenciar clic de arrastre
+
+    track.addEventListener('mousedown', (e) => {
+        isDown = true;
+        isDragging = false;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = scrollAmount; // Usamos la variable scrollAmount global
+        track.style.cursor = 'grabbing';
+    });
+
+    track.addEventListener('mouseleave', () => {
+        isDown = false;
+        track.style.cursor = 'grab';
+    });
+
+    track.addEventListener('mouseup', () => {
+        isDown = false;
+        track.style.cursor = 'grab';
+        // Ajustar al slide más cercano (opcional, o dejar libre)
+    });
+
+    track.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 2; // Velocidad del scroll
+        isDragging = true;
+
+        // Actualizamos scrollAmount pero validando límites
+        let newScroll = scrollLeft - walk;
+        const containerWidth = document.querySelector('.carousel-container').offsetWidth;
+        const trackWidth = track.scrollWidth;
+
+        if (newScroll < 0) newScroll = 0;
+        if (newScroll > trackWidth - containerWidth) newScroll = trackWidth - containerWidth;
+
+        scrollAmount = newScroll;
+        track.style.transform = `translateX(-${scrollAmount}px)`;
+    });
+
+    // TOUCH EVENTS (Móvil)
+    track.addEventListener('touchstart', (e) => {
+        isDown = true;
+        isDragging = false;
+        startX = e.touches[0].pageX - track.offsetLeft;
+        scrollLeft = scrollAmount;
+    });
+
+    track.addEventListener('touchend', () => {
+        isDown = false;
+    });
+
+    track.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - track.offsetLeft;
+        const walk = (x - startX) * 2;
+        isDragging = true;
+
+        let newScroll = scrollLeft - walk;
+        const containerWidth = document.querySelector('.carousel-container').offsetWidth;
+        const trackWidth = track.scrollWidth;
+
+        if (newScroll < 0) newScroll = 0;
+        if (newScroll > trackWidth - containerWidth) newScroll = trackWidth - containerWidth;
+
+        scrollAmount = newScroll;
         track.style.transform = `translateX(-${scrollAmount}px)`;
     });
 
