@@ -66,6 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Menú Hamburguesa simple para móvil (Lógica Antigua eliminada)
+
+    // --- EFECTO NAVBAR STICKY ---
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) { // Si bajamos más de 100px (aprox llegando a artistas o dejando hero)
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
 });
 
 // Función Global para el menú
