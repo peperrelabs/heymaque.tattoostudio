@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería Julián González | Peluquería de caballeros</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        /* --- CONFIGURACIÓN BASE & VARIABLES --- */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-panel: #141414;
+            --gold-primary: #c5a059;
+            /* Dorado más sobrio y elegante */
+            --gold-light: #e6c67c;
+            --text-white: #ffffff;
+            --text-gray: #a1a1a1;
+            --font-display: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+        }
+
+        /* --- UTILIDADES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--gold-primary);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--gold-primary);
+            margin: 20px auto 0;
+        }
+
+        /* --- HERO SECTION (PARALLAX) --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(#141414DD, #141414FF),
+                url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Efecto Parallax */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeIn Up 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .btn-premium {
+            display: inline-block;
+            padding: 18px 45px;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            background: transparent;
+            font-size: 0.9rem;
+        }
+
+        .btn-premium:hover {
+            background: var(--gold-primary);
+            color: #000;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+        }
+
+        /* --- SERVICIOS Y PRECIOS --- */
+        .pricing-section {
+            background-color: var(--bg-panel);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-left: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .price-card:hover {
+            border-left: 1px solid var(--gold-primary);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .service-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: #fff;
+        }
+
+        .service-price {
+            font-size: 1.4rem;
+            color: var(--gold-primary);
+            font-weight: 600;
+        }
+
+        .service-desc {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        /* --- CONTACTO & MAPA --- */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+
+        .contact-info {
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-item {
+            margin-bottom: 40px;
+        }
+
+        .info-item h3 {
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .info-item p,
+        .info-item a {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(80%) invert(92%) contrast(83%);
+            /* Mapa estilo oscuro */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid #222;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr !important;
+            }
+
+            .map-column {
+                min-height: 300px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar-menu a {
+            color: var(--text-white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .navbar-menu a:hover {
+            color: var(--gold-primary);
+        }
+
+        .navbar-cta {
+            padding: 10px 25px;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .navbar-cta:hover {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        /* --- SERVICES PREMIUM --- */
+        .services-premium {
+            background-color: var(--bg-dark);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .services-header p {
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .premium-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 30px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card:hover {
+            border-color: rgba(197, 160, 89, 0.4);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .card-icon .material-symbols-outlined {
+            font-size: 32px;
+        }
+
+        .premium-card:hover .card-icon {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0;
+        }
+
+        .card-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 768px) {
+            .navbar-content {
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                /* Equal side columns for perfect centering */
+                align-items: center;
+                gap: 5px;
+                /* Reduced gap */
+                padding-right: 20px;
+                height: 60px;
+                /* Enforce height */
+            }
+
+            .navbar-logo {
+                grid-column: 1;
+                grid-row: 1;
+                /* Force row 1 */
+                justify-self: start;
+                display: flex;
+                margin-top: 0 !important;
+                /* Reset global style */
+            }
+
+            .navbar-logo img {
+                height: 35px;
+                /* Ensure it fits */
+                width: auto;
+            }
+
+            .navbar-cta {
+                grid-column: 2;
+                grid-row: 1;
+                /* Force row 1 */
+                justify-self: center;
+                padding: 8px 12px;
+                font-size: 0.7rem;
+                white-space: nowrap;
+                margin: 0 !important;
+                /* Reset global style */
+                width: auto;
+            }
+
+            /* Mobile Menu Toggle */
+            .menu-toggle {
+                display: flex !important;
+                grid-column: 3;
+                grid-row: 1;
+                /* Force row 1 */
+                justify-self: end;
+                margin: 0 !important;
+            }
+
+            .navbar-menu {
+                display: none;
+                position: fixed;
+                top: 70px;
+                /* Below navbar */
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                gap: 30px;
+                border-bottom: 1px solid var(--gold-primary);
+                transform: translateY(-150%);
+                transition: transform 0.4s ease;
+                z-index: 999;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+                transform: translateY(0);
+            }
+
+            .menu-toggle {
+                display: flex !important;
+                grid-column: 3;
+                justify-self: end;
+            }
+
+            .hero {
+                padding-top: 80px;
+                /* offset fixed nav */
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold-primary);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle .material-symbols-outlined {
+            font-size: 32px;
+        }
+
+        /* --- CONTACT SECTION NEW --- */
+        .contact-new-section {
+            background-color: var(--bg-dark);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-details-col {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-header mb-4 {
+            margin-bottom: 20px;
+        }
+
+        .contact-header h2 {
+            font-size: 2rem;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .contact-header h2::after {
+            display: none;
+        }
+
+        .contact-header p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .contact-icon-box {
+            width: 40px;
+            height: 40px;
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--gold-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-text h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 5px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+        }
+
+        .contact-text p,
+        .contact-text a {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-decoration: none;
+            display: block;
+        }
+
+        .contact-text span {
+            display: block;
+        }
+
+        .map-column {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            min-height: 400px;
+        }
+
+        .map-column iframe {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(100%) invert(92%) contrast(83%);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .map-column iframe:hover {
+            opacity: 1;
+        }
+
+        .map-overlay-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-panel);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .map-overlay-btn:hover {
+            background: var(--gold-primary);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="#" class="navbar-logo">
+                <img src="img/Logo_completo.png" alt="Barbería Julián González">
+            </a>
+
+            <!-- Mobile Toggle (Hidden on desktop) -->
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+
+            <div class="navbar-menu" id="navbar-menu">
+                <a href="#services" onclick="toggleMenu()">Servicios</a>
+                <a href="#pricing" onclick="toggleMenu()">Precios</a>
+                <a href="#contact" onclick="toggleMenu()">Ubicación</a>
+            </div>
+
+            <a href="https://booksy.com/es-es/133820_barberia-julian-gonzalez_barberia_29895_mairena-del-aljarafe"
+                class="navbar-cta" target="_blank">
+                ¡Reservar ya!
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Mairena del Aljarafe</span>
+            <div
+                style="display: inline-block; border: 1px solid var(--gold-primary); padding: 5px 15px; margin: 15px 0 30px; color: var(--gold-primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; border-radius: 20px;">
+                desde 2015</div>
+            <img src="img/Logo_completo.png" alt="Barbería Julián González"
+                style="max-width: 400px; width: 100%; height: auto; margin-bottom: 40px; display: block; margin-left: auto; margin-right: auto;">
+
+            <a href="https://booksy.com/es-es/133820_barberia-julian-gonzalez_barberia_29895_mairena-del-aljarafe"
+                class="btn-premium" target="_blank">
+                Reservar Cita Online
+            </a>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- SERVICIOS PREMIUM (NEW SECTION) -->
+    <section id="services" class="section-padding services-premium">
+        <div class="container">
+            <div class="services-header">
+                <h2>Servicios Premium</h2>
+                <p>Ofrecemos una gama de servicios adaptados a tus necesidades, realizados por Julian González
+                    que cuidará todos los detalles.</p>
+            </div>
+            <div class="premium-grid">
+                <!-- Card 1 -->
+                <div class="premium-card">
+                    <div class="card-icon">
+                        <span class="material-symbols-outlined">content_cut</span>
+                    </div>
+                    <h3 class="card-title">Corte Clásico</h3>
+                    <p class="card-desc">Corte de precisión con máquina y tijera, acabado con productos de estilo
+                        premium y afeitado de cuello.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="premium-card">
+                    <div class="card-icon">
+                        <span class="material-symbols-outlined">face</span>
+                    </div>
+                    <h3 class="card-title">Arreglo de Barba</h3>
+                    <p class="card-desc">Perfilado y recorte experto para mantener tu estilo, acabado con aceite y
+                        bálsamo para barba.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="premium-card">
+                    <div class="card-icon">
+                        <span class="material-symbols-outlined">soap</span>
+                    </div>
+                    <h3 class="card-title">Afeitado Tradicional</h3>
+                    <p class="card-desc">Afeitado tradicional con navaja, toallas calientes relajantes y tratamiento
+                        aftershave premium.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section-padding pricing-section">
+        <div class="container">
+            <h2>Nuestros Precios</h2>
+
+            <div class="pricing-grid">
+                <div>
+                    <div class="price-card">
+                        <div class="price-row">
+                            <span class="service-title">Corte Clásico</span>
+                            <span class="service-price">12€</span>
+                        </div>
+                        <span class="service-desc">Tijera o máquina, acabado impecable.</span>
+                    </div>
+
+                    <div class="price-card" style="margin-top: 20px;">
+                        <div class="price-row">
+                            <span class="service-title">Corte + Barba</span>
+                            <span class="service-price">16€</span>
+                        </div>
+                        <span class="service-desc">Servicio completo de cuidado personal.</span>
+                    </div>
+
+                    <div class="price-card" style="margin-top: 20px;">
+                        <div class="price-row">
+                            <span class="service-title">Afeitado Ritual</span>
+                            <span class="service-price">12€</span>
+                        </div>
+                        <span class="service-desc">Toalla caliente y productos premium.</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="price-card">
+                        <div class="price-row">
+                            <span class="service-title">Rapado Integral</span>
+                            <span class="service-price">6€</span>
+                        </div>
+                        <span class="service-desc">Uniforme y pulido.</span>
+                    </div>
+
+                    <div class="price-card" style="margin-top: 20px;">
+                        <div class="price-row">
+                            <span class="service-title">Corte Niño</span>
+                            <span class="service-price">8€</span>
+                        </div>
+                        <span class="service-desc">Edad guardería. Cuidado especial.</span>
+                    </div>
+
+                    <div class="price-card" style="margin-top: 20px;">
+                        <div class="price-row">
+                            <span class="service-title">Arreglo Barba</span>
+                            <span class="service-price">8€</span>
+                        </div>
+                        <span class="service-desc">Perfilado y rebajado de volumen.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding contact-new-section">
+        <div class="services-header">
+            <h2>Visitanos</h2>
+            <p>Pásate por un corte o simplemente a saludar. Se aceptan visitas sin cita previa según
+                disponibilidad.</p>
+        </div>
+        <div class="contact-container" style="padding: 0 20px;">
+            <!-- Left Info -->
+            <div class="contact-details-col">
+
+                <div class="contact-list">
+                    <!-- Location -->
+                    <div class="contact-row">
+                        <div class="contact-icon-box">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">location_on</span>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Ubicación</h3>
+                            <p>Calle Guadiato, 7. Rotonda del Mudo<br>41927 Mairena del Aljarafe, Sevilla</p>
+                        </div>
+                    </div>
+
+                    <!-- Hours -->
+                    <div class="contact-row">
+                        <div class="contact-icon-box">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Horario</h3>
+                            <span>Lunes a Viernes: 9:30 - 14:00 | 17:00 - 20:30</span>
+                            <span>Sábados y Domingos: Cerrado</span>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="contact-row">
+                        <div class="contact-icon-box">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">call</span>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Contacto</h3>
+                            <a href="tel:617484014">617 484 014</a>
+                            <p>Reserva online o llámanos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Map -->
+            <div class="map-column">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12687.707443148722!2d-6.0785113!3d37.3442402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126d3d31e97971%3A0x9578fd37f30d17c3!2zQmFyYmVyw61hIEp1bGnDoW4gR29uesOhbGV6!5e0!3m2!1ses!2ses!4v1769464401159!5m2!1ses!2ses"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                <a href="https://goo.gl/maps/tu_link_real" target="_blank" class="map-overlay-btn">
+                    Abrir en Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BARBERIA JULIÁN GONZÁLEZ. TODOS LOS DERECHOS RESERVADOS.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">Created by <strong
+                style="color: var(--gold-primary);">PeperreLabs</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
