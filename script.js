@@ -1,41 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('navbar-menu');
-    const menuLinks = menu.querySelectorAll('a');
 
-    function toggleMenu() {
-        // Toggle active class on menu
-        menu.classList.toggle('active');
-        
-        // Change icon
-        const icon = menuBtn.querySelector('.material-symbols-outlined');
-        if (menu.classList.contains('active')) {
-            icon.textContent = 'close';
-        } else {
-            icon.textContent = 'menu';
+    // --- CONFIGURACIÓN DE LA GALERÍA ---
+    const totalImagesInFolder = 30; // CAMBIA ESTO: Número total de fotos que tienes en la carpeta 'img'
+    const imagesToShow = 10;        // Cuántas queremos mostrar
+    const imageFolder = 'img/';     // Ruta de la carpeta
+    const imageExtension = '.jpg';  // Extensión de tus archivos (asegúrate que sean todas iguales)
+
+    const track = document.getElementById('dynamic-gallery');
+
+    // 1. Función para obtener números aleatorios únicos
+    function getRandomImageIndices(total, count) {
+        const indices = [];
+        while (indices.length < count) {
+            const r = Math.floor(Math.random() * total) + 1;
+            if (indices.indexOf(r) === -1) indices.push(r);
         }
+        return indices;
     }
 
-    if (menuBtn) {
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent immediate closing if we had a document click listener
-            toggleMenu();
-        });
-    }
+    // 2. Generar el HTML de las imágenes
+    // NOTA: Para probarlo ahora mismo sin tus fotos, usaré unsplash. 
+    // Cuando pongas tus fotos, descomenta la linea "SRC REAL" y comenta la de UNSPLASH.
 
-    // Close menu when clicking a link
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (menu.classList.contains('active')) {
-                toggleMenu();
-            }
-        });
+    const randomIndices = getRandomImageIndices(totalImagesInFolder, imagesToShow);
+
+    randomIndices.forEach(index => {
+        const li = document.createElement('li');
+        li.classList.add('carousel-slide');
+
+        const img = document.createElement('img');
+
+        // --- OPCIÓN A: TUS FOTOS REALES (Descomenta esto cuando tengas la carpeta lista) ---
+        // img.src = `${imageFolder}${index}${imageExtension}`;
+        // img.alt = `Tatuaje trabajo ${index}`;
+
+        // --- OPCIÓN B: FOTOS DE EJEMPLO (Para que veas la web funcionando ya) ---
+        img.src = `https://source.unsplash.com/random/400x600?tattoo,ink&sig=${index}`;
+        img.alt = "Tatuaje ejemplo";
+
+        li.appendChild(img);
+        track.appendChild(li);
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (menu.classList.contains('active') && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
-            toggleMenu();
+    // --- LÓGICA DEL CARRUSEL ---
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    let scrollAmount = 0;
+
+    nextBtn.addEventListener('click', () => {
+        const slideWidth = document.querySelector('.carousel-slide').offsetWidth + 20; // ancho + margen
+        const trackWidth = track.scrollWidth;
+        const containerWidth = document.querySelector('.carousel-container').offsetWidth;
+
+        scrollAmount += slideWidth;
+        if (scrollAmount > trackWidth - containerWidth) {
+            scrollAmount = 0; // Volver al principio si llegamos al final
+        }
+        track.style.transform = `translateX(-${scrollAmount}px)`;
+    });
+
+    prevBtn.addEventListener('click', () => {
+        const slideWidth = document.querySelector('.carousel-slide').offsetWidth + 20;
+
+        scrollAmount -= slideWidth;
+        if (scrollAmount < 0) {
+            scrollAmount = 0;
+        }
+        track.style.transform = `translateX(-${scrollAmount}px)`;
+    });
+
+    // Menú Hamburguesa simple para móvil
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        if (navLinks.style.display === 'flex') {
+            navLinks.style.display = 'none';
+        } else {
+            navLinks.style.display = 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '70px';
+            navLinks.style.right = '0';
+            navLinks.style.background = '#fff';
+            navLinks.style.width = '100%';
+            navLinks.style.padding = '2rem';
         }
     });
 });
