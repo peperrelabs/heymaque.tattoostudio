@@ -203,62 +203,58 @@ ul { list-style: none; }
 .social-link { display: inline-block; margin-top: 1.5rem; font-weight: 600; border-bottom: 1px solid transparent; }
 .social-link:hover { border-bottom: 1px solid var(--text-color); }
 
-/* GALERÍA / CARRUSEL */
+/* GALERÍA / CARRUSEL (Swiper.js) */
 .gallery-section { padding: 4rem 5%; background-color: #f4f4f4; text-align: center; }
 
 .carousel-container {
-    position: relative;
-    height: 400px;
-    width: 90%;
+    width: 100%;
+    max-width: 1200px; /* Limit width on large screens */
     margin: 0 auto;
+    padding-bottom: 50px; /* Space for pagination if used, or just breathing room */
+}
+
+/* Swiper default overrides if needed */
+.swiper {
+    width: 100%;
+    height: 400px; 
+}
+
+.swiper-slide {
+    text-align: center;
+    background: #fff;
+    /* Center slide content vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
     overflow: hidden;
 }
 
-.carousel-track-container {
-    height: 100%;
-    width: 100%;
-}
-
-.carousel-track {
-    display: flex;
-    height: 100%;
-    transition: transform 0.5s ease-out; /* Suavizar un poco */
-    cursor: grab;
-}
-.carousel-track:active {
-    cursor: grabbing;
-}
-
-.carousel-slide {
-    min-width: 300px; /* Ancho de cada foto */
-    margin-right: 20px;
-    height: 100%;
-    list-style: none;
-}
-
-.carousel-slide img {
+.swiper-slide img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 5;
+.swiper-slide:hover img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Custom Navigation Buttons */
+.swiper-button-next, .swiper-button-prev {
     color: var(--gold);
-    -webkit-text-stroke: 1px black; /* Borde negro fino para contraste */
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5); /* Sombra adicional para profundidad */
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
     transition: transform 0.2s;
 }
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
-.carousel-btn:hover { transform: translateY(-50%) scale(1.1); }
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    transform: scale(1.1);
+    color: var(--text-color);
+}
+
 
 /* LIGHTBOX (Visor de imágenes) */
 .lightbox {
